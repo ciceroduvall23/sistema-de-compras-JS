@@ -18,8 +18,43 @@ function ready(){
    for (var i = 0; quantityInputs.length; i++){
     quantityInputs[i].addEventListener("change", updateTotal)
 }
+
+const addToCardButtons = document.getElementsByClassName("button-hover-background") 
+for (var i = 0; addToCardButtons.length; i++){
+    addToCardButtons[i].addEventListener("click", addProductToCard)
 }
 
+}
+
+function addProductToCard(event){
+    const button = event.target
+    const productInfos = button.parentElement.parentElement
+    const productImage = productInfos.getElementsByClassName("product-image")[0].src
+    const productTitle = productInfos.getElementsByClassName("product-title")[0].innerText
+    const productPrice = productInfos.getElementsByClassName("product-price")[0].innerText
+
+
+    let newCartProduct = document.createElement("tr")
+    newCartProduct.classList.add("cart-product")
+
+    newCartProduct.innerHTML =
+    `
+    <td class="product-identification">
+    <img src="${productImage}" alt="${productTitle}" class="cart-product-image">
+    <strong class="cart-product-title">${productTitle}</strong>
+  </td>
+  <td>
+    <span class="cart-product-price">${productPrice}</span>
+  </td>
+  <td>
+    <input type="number" value="1" min="0" class="product-qtd-input">
+    <button type="button" class="remove-product-button">Remover</button>
+  </td>
+  `
+
+  const tableBody = document.querySelector(".cart-table tbody")
+  tableBody.append(newCartProduct)
+}
 
 
 function removeProduct(event){
