@@ -19,13 +19,21 @@ function ready(){
 
    const quantityInputs = document.getElementsByClassName("product-qtd-input") 
    for (var i = 0; i <  quantityInputs.length; i++){
-    quantityInputs[i].addEventListener("change", updateTotal)
+    quantityInputs[i].addEventListener("change",checkIfInputIsNull)
 }
 const addToCardButtons = document.getElementsByClassName("button-hover-background") 
 for (var i = 0; i <  addToCardButtons.length; i++){ /* vai percorrer por cada classe que tem o nome de button-hover-background*/
-    addToCardButtons[i].addEventListener("click", addProductToCard) /* adicionar o ouvir de evento addEventListener o evento vai ser o click*/
+    addToCardButtons[i].addEventListener("click",addProductToCard) /* adicionar o ouvir de evento addEventListener o evento vai ser o click*/
 
 }
+}
+
+function checkIfInputIsNull(event){
+ if (event.target.value == "0"){
+    event.target.parentElement.parentElement.remove()
+ }
+ updateTotal()
+  
 }
 
 function addProductToCard(event)
