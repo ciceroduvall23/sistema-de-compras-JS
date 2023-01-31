@@ -36,7 +36,14 @@ function addProductToCard(event)
     const productTitle = productInfos.getElementsByClassName("product-title")[0].innerText
     const productPrice = productInfos.getElementsByClassName("product-price")[0].innerText
   
-
+    const productsCardName = document.getElementsByClassName("cart-product-title")
+   for(var i = 0; i < productsCardName.length; i++){
+      if(productsCardName[i].innerText == productTitle){
+        productsCardName[i].parentElement.parentElement.getElementsByClassName("product-qtd-input")[0].value++
+      return 
+    }
+   }
+    
     let newCartProduct = document.createElement("tr")
     newCartProduct.classList.add("cart-product")
 
