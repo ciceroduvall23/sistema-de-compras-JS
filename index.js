@@ -43,6 +43,9 @@ function makePurchase(){
 
     `)
   }
+
+  document.querySelector(".cart-table tbody").innerHTML= ""
+  updateTotal
 }
 
 function checkIfInputIsNull(event){
