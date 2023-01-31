@@ -8,6 +8,8 @@ if (document.readyState = "loading"){  /* readyState  vai detectar se a página 
     /*se já foi carregada o javascript vai ser carregado */
 }
 
+var totalAmount = "0,00"
+
 function ready(){
 
     
@@ -26,6 +28,21 @@ for (var i = 0; i <  addToCardButtons.length; i++){ /* vai percorrer por cada cl
     addToCardButtons[i].addEventListener("click",addProductToCard) /* adicionar o ouvir de evento addEventListener o evento vai ser o click*/
 
 }
+const purchaseBottun = document.getElementsByClassName("purchase-button")[0]
+purchaseBottun.addEventListener("click", makePurchase)
+}
+
+function makePurchase(){
+  if(totalAmount == "0,00"){
+    alert("Seu Carrinho está fazio")
+  }else{
+    alert(`
+     Obrigaod pela sua compra!
+     Valor do pedido:R$${totalAmount}
+     Volte sempre
+
+    `)
+  }
 }
 
 function checkIfInputIsNull(event){
@@ -74,7 +91,7 @@ const tableBody = document.querySelector(".cart-table tbody")
 tableBody.append(newCartProduct)
 
 updateTotal()
-newCartProduct.getElementsByClassName("product-qtd-input")[0].addEventListener("change",updateTotal)
+newCartProduct.getElementsByClassName("product-qtd-input")[0].addEventListener("change",checkIfInputIsNull)
 newCartProduct.getElementsByClassName("remove-product-button")[0].addEventListener("click", removeProduct)
 
 }
@@ -93,7 +110,7 @@ function removeProduct(event){
 function updateTotal(){
    
     
-    let totalAmount= 0 
+    totalAmount = 0 
     const cartProducts = document.getElementsByClassName("cart-product")
     for (var i = 0; i < cartProducts.length; i++){
         const productPrice = cartProducts[i].getElementsByClassName("cart-product-price")[0].innerText.replace("R$", "").replace(",", ".")
